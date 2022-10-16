@@ -9,7 +9,7 @@ const Login = () => {
 	const navigate = useNavigate();
 	const responseGoogle = async res => {
 		try {
-			localStorage.setItem("user", res.profileObj);
+			localStorage.setItem("user", JSON.stringify(res.profileObj));
 			const { name, googleId, imageUrl } = res.profileObj;
 			const doc = {
 				_id: googleId,
