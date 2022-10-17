@@ -11,7 +11,7 @@ const isActiveStyle =
 const categories = [
 	{ name: "Animals" },
 	{ name: "Cars" },
-	{ name: "Gaming" },
+	{ name: "Nature" },
 	{ name: "Anime" },
 ];
 const Sidebar = ({ user, closeToggle }) => {

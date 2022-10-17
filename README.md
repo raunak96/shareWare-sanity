@@ -21,3 +21,4 @@
     2.  Now if we try to add user(or any other request) to Sanity backend, we will get `CORS` error. To fix this, again in `API` tab in Sanity Manage, we will see `CORS origins` tab. Here we simply add our frontend baseURL and we are good to go.
 
 - ### Querying Data from Sanity uses  GROQ (Graph-Relational Object Queries) language (somewhat like GQL queries). It has a particular syntax for queries. [Refer](./frontend/src/queries/userQueries.js). [Docs](https://www.sanity.io/docs/js-client).
+- We query sanity for getting pins based on certain categories or searchTerm which we used data filtering, projection, dereferencing and text matching. [Refer](./frontend/src/queries/pinQueries.js). [Docs for Query](https://www.sanity.io/docs/how-queries-work). [Docs for Text-matching](https://www.sanity.io/docs/query-cheat-sheet#170b92d4caa2).
