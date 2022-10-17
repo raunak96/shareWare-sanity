@@ -9,18 +9,21 @@ const Login = () => {
 	const navigate = useNavigate();
 	const responseGoogle = async res => {
 		try {
-			localStorage.setItem("user", JSON.stringify(res.profileObj));
-			const { name, googleId, imageUrl } = res.profileObj;
-			const doc = {
-				_id: googleId,
-				_type: "user",
-				userName: name,
-				avatar: imageUrl,
-			};
-			await client.createIfNotExists(doc);
-			navigate("/");
+			if (res?.profileObj) {
+				localStorage.setItem("user", JSON.stringify(res.profileObj));
+				const { name, googleId, imageUrl } = res.profileObj;
+				const doc = {
+					_id: googleId,
+					_type: "user",
+					userName: name,
+					avatar: imageUrl,
+				};
+				await client.createIfNotExists(doc);
+				navigate("/", { replace: true });
+			}
 		} catch (error) {
 			console.log(error);
+			localStorage.clear();
 		}
 	};
 	return (
@@ -35,7 +38,7 @@ const Login = () => {
 					muted
 					type="video/mp4"
 				/>
-				<div className="absolute h-screen bg-blackOverlay inset-0 flex flex-col justify-center items-center">
+				<div className="absolute h-screen bg-blackOverlay opacity-90 inset-0 flex flex-col justify-center items-center">
 					<div className="p-5">
 						<img src={logo} alt="logo" width="130px" />
 					</div>

@@ -2,7 +2,7 @@ import { HiMenu } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import logo from "../assets/logo.png";
 import { Sidebar } from "../components";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { client } from "../sanity.config.js";
@@ -12,7 +12,14 @@ import { UserProfile, Pins } from ".";
 const Home = () => {
 	const [toggleSidebar, setToggleSidebar] = useState(false);
 	const [user, setUser] = useState(null);
+	const scrollRef = useRef(null);
 	const [userInfo] = useLocalStorage("user");
+
+	useEffect(() => {
+		/* Every time this component rendered scroll to Top of page */
+		scrollRef.current.scrollTo(0, 0);
+	});
+
 	useEffect(() => {
 		const fetchCurrentUser = async () => {
 			const query = getUserQuery(userInfo?.googleId);
@@ -35,10 +42,12 @@ const Home = () => {
 				<div className="p-2 w-full flex flex-row justify-between items-center shadow-md">
 					<HiMenu
 						fontSize={40}
-						className="cursor-pointer"
+						className={`cursor-pointer ${
+							toggleSidebar && "invisible"
+						}`}
 						onClick={() => setToggleSidebar(true)}
 					/>
-					<Link to="/">
+					<Link to="/" className={toggleSidebar ? "invisible" : ""}>
 						<img src={logo} alt="logo" className="w-28" />
 					</Link>
 					<Link to={`user-profile/${user?._id}`}>
@@ -50,7 +59,7 @@ const Home = () => {
 					</Link>
 				</div>
 				{toggleSidebar && (
-					<div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
+					<div className="fixed w-2/3 sm:w-2/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
 						<div className="absolute w-full flex justify-end items-center p-2">
 							<AiFillCloseCircle
 								fontSize={30}
@@ -65,7 +74,9 @@ const Home = () => {
 					</div>
 				)}
 			</div>
-			<div className="pb-2 flex-1 h-screen overflow-y-scroll">
+			<div
+				className="pb-2 flex-1 h-screen overflow-y-scroll"
+				ref={scrollRef}>
 				{/* Nested Routes to Home("/") */}
 				<Routes>
 					<Route
