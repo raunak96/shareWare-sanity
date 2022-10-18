@@ -4,7 +4,7 @@ import { Spinner, MasonryLayout } from ".";
 import { feedQuery, searchPins } from "../queries/pinQueries";
 import { client } from "../sanity.config";
 
-const Feed = () => {
+const Feed = ({ user }) => {
 	const [pins, setPins] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const { categoryName } = useParams();
@@ -29,8 +29,10 @@ const Feed = () => {
 
 	return isLoading ? (
 		<Spinner message="We are adding new ideas for your feed." />
+	) : pins?.length ? (
+		<MasonryLayout pins={pins} setPins={setPins} user={user} />
 	) : (
-		pins && <MasonryLayout pins={pins} />
+		<p className="text-center text-xl">No Pins Yet</p>
 	);
 };
 export default Feed;

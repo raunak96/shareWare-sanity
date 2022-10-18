@@ -5,12 +5,12 @@ import GoogleLogin from "react-google-login";
 import { client } from "../sanity.config";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setValue }) => {
 	const navigate = useNavigate();
 	const responseGoogle = async res => {
 		try {
 			if (res?.profileObj) {
-				localStorage.setItem("user", JSON.stringify(res.profileObj));
+				setValue(res.profileObj);
 				const { name, googleId, imageUrl } = res.profileObj;
 				const doc = {
 					_id: googleId,

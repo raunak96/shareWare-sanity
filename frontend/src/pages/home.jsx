@@ -83,7 +83,7 @@ const Home = () => {
 						path="/user-profile/:userId"
 						element={<UserProfile />}
 					/>
-					<Route path="/*" element={<Pins user={user && user} />} />
+					{user && <Route path="/*" element={<Pins user={user} />} />}
 				</Routes>
 			</div>
 		</div>

@@ -17,15 +17,18 @@ const Pins = ({ user }) => {
 			</div>
 			<div className="h-full">
 				<Routes>
-					<Route path="/" element={<Feed />} />
-					<Route path="/category/:categoryName" element={<Feed />} />
+					<Route path="/" element={<Feed user={user} />} />
+					<Route
+						path="/category/:categoryName"
+						element={<Feed user={user} />}
+					/>
 					<Route
 						path="/pin-detail/:pinId"
-						element={<PinDetail user={user && user} />}
+						element={<PinDetail user={user} />}
 					/>
 					<Route
 						path="/create-pin"
-						element={<CreatePin user={user && user} />}
+						element={<CreatePin user={user} />}
 					/>
 					<Route
 						path="/search"
