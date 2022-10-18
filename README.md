@@ -22,3 +22,7 @@
 
 - ### Querying Data from Sanity uses  GROQ (Graph-Relational Object Queries) language (somewhat like GQL queries). It has a particular syntax for queries. [Refer](./frontend/src/queries/userQueries.js). [Docs](https://www.sanity.io/docs/js-client).
 - We query sanity for getting pins based on certain categories or searchTerm which we used data filtering, projection, dereferencing and text matching. [Refer](./frontend/src/queries/pinQueries.js). [Docs for Query](https://www.sanity.io/docs/how-queries-work). [Docs for Text-matching](https://www.sanity.io/docs/query-cheat-sheet#170b92d4caa2).
+- ### Updating Document in Sanity called Patching (in our case we did it for adding data to save array inside Pin document)
+  - `Patch` method is used to update document in Sanity. [Refer Code](/frontend/src/components/Pin.jsx#L24), [Docs](https://www.sanity.io/docs/js-client#patch-update-a-document).
+
+- For displaying all Pins in Page we used `MasonryLayout` instead of simple Grid or Flex-box.We used [react-masonry-css](https://github.com/paulcollett/react-masonry-css) package for it which arranges which places items in fixed no of rows(or columns) which are responsive according to breakpoints but heights(or widths) of items are unequal.
