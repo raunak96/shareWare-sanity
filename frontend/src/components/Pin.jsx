@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from "uuid";
 
 const Pin = ({ pin, setPins, user }) => {
 	const { image, _id, destination, save, postedBy } = pin;
-	console.log(postedBy);
 	const [isAlreadySaved, setIsAlreadySaved] = useState(
 		!!save?.find(save => save.postedBy?._id === user?._id)
 	);
@@ -43,7 +42,14 @@ const Pin = ({ pin, setPins, user }) => {
 								...p,
 								save: [
 									...(p.save ?? []),
-									{ _key: key, postedBy },
+									{
+										_key: key,
+										postedBy: {
+											id: user._id,
+											userName: user.userName,
+											avatar: user.avatar,
+										},
+									},
 								],
 						  }
 						: p
@@ -113,7 +119,9 @@ const Pin = ({ pin, setPins, user }) => {
 								className="bg-white w-4/5 flex items-center gap-2 text-black font-bold p-2 px-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md "
 								rel="noreferrer">
 								<p className="break-words text-ellipsis overflow-hidden whitespace-nowrap">
-									{destination.slice(8)}
+									{pin.destination.length < 20
+										? pin.destination
+										: `${pin.destination.slice(8, 30)}...`}
 								</p>
 							</a>
 						)}

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import { Feed, PinDetail, Search } from "../components";
-import { CreatePin } from "../pages";
+import { Feed, Search } from "../components";
+import { CreatePin, PinDetail } from "../pages";
 
 const Pins = ({ user }) => {
 	const [searchTerm, setSearchTerm] = useState("");

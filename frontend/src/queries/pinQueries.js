@@ -58,3 +58,68 @@ export const feedQuery = `*[_type == "pin"] | order(_createdAt desc) {
         },
       },
     } `;
+
+// Get Pin by id
+export const getPinByIdQuery = pinId => {
+	const query = `*[_type=="pin" && _id=="${pinId}"]{
+         image{
+      asset->{
+        url
+      }
+    },
+    _id,
+    title, 
+    about,
+    category,
+    destination,
+    postedBy->{
+      _id,
+      userName,
+      avatar
+    },
+   save[]{
+      postedBy->{
+        _id,
+        userName,
+        avatar
+      },
+    },
+    comments[]{
+      comment,
+      _key,
+      postedBy->{
+        _id,
+        userName,
+        avatar
+      },
+    }
+    }`;
+	return query;
+};
+
+// Get Pins similar to given Pin (similarity based on Category)
+export const getPinSuggestionsQuery = pin => {
+	const query = `*[_type=="pin" && category=="${pin.category}" && _id!="${pin._id}"]{
+    image{
+        asset->{
+            url
+        }
+    },
+        _id,
+        destination,
+        postedBy->{
+            _id,
+            userName,
+            avatar
+        },
+        save[]{
+            _key,
+            postedBy->{
+                _id,
+                userName,
+                avatar
+            },
+        },
+    }`;
+	return query;
+};

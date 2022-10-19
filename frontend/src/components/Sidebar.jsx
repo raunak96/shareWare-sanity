@@ -40,6 +40,7 @@ const Sidebar = ({ user, closeToggle }) => {
 					<h3 className="mt-2 px-5 text-base xl:text-xl">
 						Discover categories
 					</h3>
+					<hr className="w-4/5 mx-auto" />
 					{categories
 						.slice(0, categories.length - 1)
 						.map((category, ind) => (
