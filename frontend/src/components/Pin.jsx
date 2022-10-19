@@ -67,83 +67,81 @@ const Pin = ({ pin, setPins, user }) => {
 		}
 	};
 	return (
-		<div className="w-max">
-			<div className="m-2">
-				<div
-					onClick={() => navigate(`/pin-detail/${_id}`)}
-					className="group relative cursor-zoom-in w-auto hover:shadow-xl rounded-lg overflow-hidden transition-all duration-500 ease-in-out">
-					{/* urlFor is a sanity function which first optimizes the image for passed options in our case width and then returns its url  */}
-					<img
-						className="rounded-lg w-full"
-						alt="user-post"
-						src={urlFor(image).width(250).url()}
-					/>
-					<div className="hidden group-hover:flex flex-col justify-between absolute top-1 w-full h-full p-1 pr-2 py-2 z-50">
-						<div className="flex items-center justify-between">
-							<div className="flex gap-2">
-								{/* ?dl is sanity way of downloading image */}
-								<a
-									href={`${image?.asset?.url}?dl=`}
-									onClick={e => e.stopPropagation()}
-									className="bg-white w-9 h-9 p-2 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none">
-									<MdDownloadForOffline />
-								</a>
-							</div>
-							{isAlreadySaved ? (
-								<button
-									type="button"
-									className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none">
-									Saved
-								</button>
-							) : (
-								<button
-									type="button"
-									ref={buttonRef}
-									onClick={savePin}
-									className="bg-red-500 disabled:opacity-50 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none ">
-									Save
-								</button>
-							)}
+		<div className="m-2">
+			<div
+				onClick={() => navigate(`/pin-detail/${_id}`)}
+				className="group relative cursor-zoom-in w-auto hover:shadow-xl rounded-lg overflow-hidden transition-all duration-500 ease-in-out">
+				{/* urlFor is a sanity function which first optimizes the image for passed options in our case width and then returns its url  */}
+				<img
+					className="rounded-lg w-full"
+					alt="user-post"
+					src={urlFor(image).width(250).url()}
+				/>
+				<div className="hidden group-hover:flex flex-col justify-between absolute top-1 w-full h-full p-1 pr-2 py-2 z-50">
+					<div className="flex items-center justify-between">
+						<div className="flex gap-2">
+							{/* ?dl is sanity way of downloading image */}
+							<a
+								href={`${image?.asset?.url}?dl=`}
+								onClick={e => e.stopPropagation()}
+								className="bg-white w-9 h-9 p-2 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none">
+								<MdDownloadForOffline />
+							</a>
 						</div>
-						<div className=" flex justify-between items-center gap-2 w-full">
-							{destination && (
-								<a
-									href={destination}
-									target="_blank"
-									onClick={e => e.stopPropagation()}
-									className="bg-white w-4/5 flex items-center gap-2 text-black font-bold p-2 px-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md "
-									rel="noreferrer">
-									<p className="break-words text-ellipsis overflow-hidden whitespace-nowrap">
-										{destination.slice(8)}
-									</p>
-								</a>
-							)}
-							{postedBy?._id === user?._id && (
-								<button
-									type="button"
-									onClick={deletePin}
-									className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none">
-									<AiTwotoneDelete color="red" />
-								</button>
-							)}
-						</div>
+						{isAlreadySaved ? (
+							<button
+								type="button"
+								className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none">
+								Saved
+							</button>
+						) : (
+							<button
+								type="button"
+								ref={buttonRef}
+								onClick={savePin}
+								className="bg-red-500 disabled:opacity-50 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none ">
+								Save
+							</button>
+						)}
+					</div>
+					<div className=" flex justify-between items-center gap-2 w-full">
+						{destination && (
+							<a
+								href={destination}
+								target="_blank"
+								onClick={e => e.stopPropagation()}
+								className="bg-white w-4/5 flex items-center gap-2 text-black font-bold p-2 px-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md "
+								rel="noreferrer">
+								<p className="break-words text-ellipsis overflow-hidden whitespace-nowrap">
+									{destination.slice(8)}
+								</p>
+							</a>
+						)}
+						{postedBy?._id === user?._id && (
+							<button
+								type="button"
+								onClick={deletePin}
+								className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none">
+								<AiTwotoneDelete color="red" />
+							</button>
+						)}
 					</div>
 				</div>
-				<div className="flex justify-between items-center mt-2">
-					<Link
-						to={`/user-profile/${postedBy?._id}`}
-						className="flex gap-2 items-center">
-						<img
-							className="w-8 h-8 rounded-full object-cover"
-							src={postedBy?.avatar}
-							alt="user-profile"
-						/>
-						<p className="font-semibold capitalize">
-							{postedBy?.userName}
-						</p>
-					</Link>
-					{save?.length && <p>{save.length} Saves</p>}
-				</div>
+			</div>
+			<div className="flex justify-between items-center mt-2">
+				<Link
+					to={`/user-profile/${postedBy?._id}`}
+					className="flex gap-2 items-center">
+					<img
+						className="w-8 h-8 rounded-full object-cover"
+						src={postedBy?.avatar}
+						alt="user-profile"
+					/>
+					<p className="font-semibold capitalize">
+						{postedBy?.userName}
+					</p>
+				</Link>
+				{save?.length && <p>{save.length} Saves</p>}
 			</div>
 		</div>
 	);

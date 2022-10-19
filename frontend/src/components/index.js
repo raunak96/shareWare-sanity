@@ -1,4 +1,3 @@
-import CreatePin from "./CreatePin";
 import Feed from "./Feed";
 import Navbar from "./Navbar";
 import PinDetail from "./PinDetail";
@@ -14,7 +13,6 @@ export {
 	PinDetail,
 	Navbar,
 	Feed,
-	CreatePin,
 	MasonryLayout,
 	Spinner,
 	Pin,

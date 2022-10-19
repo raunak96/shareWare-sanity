@@ -7,7 +7,7 @@ const breakPoints = {
 	2000: 5,
 	1500: 4,
 	1200: 3,
-	720: 2,
+	840: 2,
 	540: 1,
 };
 
@@ -22,6 +22,7 @@ const MasonryLayout = ({ pins, setPins, user }) => {
 					pin={pin}
 					setPins={setPins}
 					user={user && user}
+					className="w-max"
 				/>
 			))}
 		</Masonry>
