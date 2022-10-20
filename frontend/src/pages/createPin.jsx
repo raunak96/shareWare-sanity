@@ -30,7 +30,6 @@ const CreatePin = ({ user }) => {
 				contentType: type,
 				filename: name,
 			});
-			console.log(imageAsset);
 		} catch (error) {
 			console.log("Image Upload failed");
 			return;
@@ -56,9 +55,7 @@ const CreatePin = ({ user }) => {
 			},
 		};
 		try {
-			const createdPin = await client.create(doc);
-			console.log(createdPin);
-			// setPins(createdPin);
+			await client.create(doc);
 			navigate("/");
 		} catch (error) {
 			console.log("Could not create a new pin", error);

@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { client } from "../sanity.config.js";
-import { getUserQuery } from "../queries/userQueries";
+import { getCurrentUserQuery } from "../queries/userQueries";
 import { UserProfile, Pins } from ".";
 
 const Home = ({ clearUserInfo }) => {
@@ -22,14 +22,14 @@ const Home = ({ clearUserInfo }) => {
 
 	useEffect(() => {
 		const fetchCurrentUser = async () => {
-			const query = getUserQuery(userInfo?.googleId);
+			const query = getCurrentUserQuery(userInfo.email);
 			try {
 				const data = await client.fetch(query);
 				setUser(data[0]);
 			} catch (err) {}
 		};
-		if (userInfo?.googleId) fetchCurrentUser();
-	}, [userInfo?.googleId]);
+		if (userInfo?.email) fetchCurrentUser();
+	}, [userInfo?.email]);
 	return (
 		<div className="flex bg-gray-50 flex-col md:flex-row h-screen transition-height duration-75 ease-out">
 			{/* >= Medium Screen Sidebar -> flex-initial is flex: 0 1 auto -> which means it will not grow even if enough free space present but shrink if not enough space  */}

@@ -1,5 +1,8 @@
 export const getUserQuery = userId => `*[_type=="user" && _id=="${userId}"]`;
 
+export const getCurrentUserQuery = email =>
+	`*[_type=="user" && email=="${email}"]`;
+
 export const getUserCreatedPinsQuery = userId => {
 	const query = `*[_type=="pin" && userId == '${userId}']| order(_createdAt desc){
          image{

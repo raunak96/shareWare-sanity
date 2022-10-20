@@ -10,13 +10,14 @@ const Login = ({ setUserInfo }) => {
 	const responseGoogle = async res => {
 		try {
 			if (res?.profileObj) {
-				setUserInfo(res.profileObj);
-				const { name, googleId, imageUrl } = res.profileObj;
+				setUserInfo({ email: res.profileObj.email });
+				const { name, googleId, imageUrl, email } = res.profileObj;
 				const doc = {
 					_id: googleId,
 					_type: "user",
 					userName: name,
 					avatar: imageUrl,
+					email,
 				};
 				await client.createIfNotExists(doc);
 				navigate("/", { replace: true });
