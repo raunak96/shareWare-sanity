@@ -32,7 +32,7 @@ const Feed = ({ user }) => {
 	) : pins?.length ? (
 		<MasonryLayout pins={pins} setPins={setPins} user={user} />
 	) : (
-		<p className="text-center text-xl">No Pins Yet</p>
+		<p className="text-center text-xl">No Pins Yet.</p>
 	);
 };
 export default Feed;

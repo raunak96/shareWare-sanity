@@ -3,7 +3,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import { Home, Login } from "./pages";
 
 const App = () => {
-	const [userInfo, setValue] = useLocalStorage("user");
+	const [userInfo, setUserInfo, clearUserInfo] = useLocalStorage("user");
 
 	return (
 		<Routes>
@@ -13,7 +13,7 @@ const App = () => {
 					userInfo ? (
 						<Navigate to="/" replace={true} />
 					) : (
-						<Login setValue={setValue} />
+						<Login setUserInfo={setUserInfo} />
 					)
 				}
 			/>
@@ -21,7 +21,7 @@ const App = () => {
 				path="/*"
 				element={
 					userInfo ? (
-						<Home />
+						<Home clearUserInfo={clearUserInfo} />
 					) : (
 						<Navigate to="/login" replace={true} />
 					)

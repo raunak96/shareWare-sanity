@@ -5,12 +5,12 @@ import GoogleLogin from "react-google-login";
 import { client } from "../sanity.config";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setValue }) => {
+const Login = ({ setUserInfo }) => {
 	const navigate = useNavigate();
 	const responseGoogle = async res => {
 		try {
 			if (res?.profileObj) {
-				setValue(res.profileObj);
+				setUserInfo(res.profileObj);
 				const { name, googleId, imageUrl } = res.profileObj;
 				const doc = {
 					_id: googleId,
@@ -38,7 +38,7 @@ const Login = ({ setValue }) => {
 					muted
 					type="video/mp4"
 				/>
-				<div className="absolute h-screen bg-blackOverlay opacity-90 inset-0 flex flex-col justify-center items-center">
+				<div className="absolute h-screen bg-blackOverlay inset-0 flex flex-col justify-center items-center">
 					<div className="p-5">
 						<img src={logo} alt="logo" width="130px" />
 					</div>

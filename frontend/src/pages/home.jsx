@@ -9,7 +9,7 @@ import { client } from "../sanity.config.js";
 import { getUserQuery } from "../queries/userQueries";
 import { UserProfile, Pins } from ".";
 
-const Home = () => {
+const Home = ({ clearUserInfo }) => {
 	const [toggleSidebar, setToggleSidebar] = useState(false);
 	const [user, setUser] = useState(null);
 	const scrollRef = useRef(null);
@@ -81,7 +81,12 @@ const Home = () => {
 				<Routes>
 					<Route
 						path="/user-profile/:userId"
-						element={<UserProfile />}
+						element={
+							<UserProfile
+								user={user}
+								clearUserInfo={clearUserInfo}
+							/>
+						}
 					/>
 					{user && <Route path="/*" element={<Pins user={user} />} />}
 				</Routes>

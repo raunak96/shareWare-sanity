@@ -5,6 +5,10 @@ const useLocalStorage = (key, initialValue) => {
 		getLocalStorageValue(key, initialValue)
 	);
 
+	const clearValue = () => {
+		localStorage.removeItem(key);
+		setLocalStorageValue(null);
+	};
 	const setValue = value => {
 		// Check if function
 		const valueToStore =
@@ -15,7 +19,7 @@ const useLocalStorage = (key, initialValue) => {
 		localStorage.setItem(key, JSON.stringify(valueToStore));
 	};
 
-	return [localStorageValue, setValue];
+	return [localStorageValue, setValue, clearValue];
 };
 
 function getLocalStorageValue(key, initialValue) {
