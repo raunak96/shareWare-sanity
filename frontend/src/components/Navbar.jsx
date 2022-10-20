@@ -1,4 +1,4 @@
-import { IoMdAdd, IoMdSearch } from "react-icons/io";
+import { IoMdAdd, IoMdSearch, IoIosClose } from "react-icons/io";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = ({ searchTerm, setSearchTerm, user }) => {
@@ -16,6 +16,13 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
 						onFocus={() => pathname !== "/" && navigate("/")}
 						className="p-3 w-full bg-white outline-none"
 					/>
+					{searchTerm && (
+						<IoIosClose
+							fontSize={30}
+							className="cursor-pointer text-red-400"
+							onClick={() => setSearchTerm("")}
+						/>
+					)}
 				</div>
 				<div className="flex gap-3">
 					<Link
