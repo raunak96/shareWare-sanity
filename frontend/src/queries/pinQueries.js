@@ -9,29 +9,29 @@
 */
 
 // Get Pins whose category/title/about field start with given searchTerm
-export const searchPins = searchTerm => {
+export const searchPinsQuery = searchTerm => {
 	const query = `*[_type=="pin" && title match "${searchTerm}*" || category match "${searchTerm}*" || about match "${searchTerm}*"]{
-        _id,
-        image{
-            asset->{
-                url
-            }
-        },
-        destination,
-        postedBy->{
             _id,
-            userName,
-            avatar
-        },
-        save[]{
-            _key,
+            image{
+                asset->{
+                    url
+                }
+            },
+            destination,
             postedBy->{
                 _id,
                 userName,
                 avatar
             },
-        },
-    }`;
+            save[]{
+                _key,
+                postedBy->{
+                    _id,
+                    userName,
+                    avatar
+                },
+            },
+        }`;
 	return query;
 };
 

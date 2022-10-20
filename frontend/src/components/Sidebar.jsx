@@ -1,6 +1,6 @@
 import { RiHomeFill } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 import { Link, NavLink } from "react-router-dom";
 import categories from "../utils/categories";
 
@@ -16,9 +16,10 @@ const Sidebar = ({ user, closeToggle }) => {
 			<div className="flex flex-col">
 				<Link
 					to="/"
-					className="flex px-5 gap-2 my-6 pt-1 w-190 items-center"
+					className="flex px-5 gap-y-2 my-6 pt-1 w-190 items-center"
 					onClick={handleCloseSidebar}>
-					<img src={logo} alt="logo" className="w-full" />
+					<img src={logo} alt="logo" className="w-2/3" />
+					<h2 className="text-red-500 font-bold -ml-2">ShareW@re</h2>
 				</Link>
 				<div className="flex flex-col gap-5">
 					{/* end prop in NavLink ensures that Home is not set to Active when its child route is Active */}

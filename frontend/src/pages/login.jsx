@@ -39,8 +39,9 @@ const Login = ({ setUserInfo }) => {
 					type="video/mp4"
 				/>
 				<div className="absolute h-screen bg-blackOverlay inset-0 flex flex-col justify-center items-center">
-					<div className="p-5">
-						<img src={logo} alt="logo" width="130px" />
+					<div className="p-5 flex items-center justify-center gap-2">
+						<img src={logo} alt="logo" width="70px" />
+						<h1 className="text-white text-3xl">SHAREW@RE</h1>
 					</div>
 					<div className="shadow-2xl">
 						<GoogleLogin

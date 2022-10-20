@@ -1,8 +1,9 @@
 import { IoMdAdd, IoMdSearch } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = ({ searchTerm, setSearchTerm, user }) => {
 	const navigate = useNavigate();
+	const { pathname } = useLocation();
 	return (
 		user && (
 			<div className="flex gap-2 md:gap-5 w-full mt-5 pb-7">
@@ -12,7 +13,7 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
 						placeholder="Search"
 						value={searchTerm}
 						onChange={e => setSearchTerm(e.target.value)}
-						onFocus={() => navigate("/search")}
+						onFocus={() => pathname !== "/" && navigate("/")}
 						className="p-3 w-full bg-white outline-none"
 					/>
 				</div>

@@ -3,9 +3,12 @@ import Navbar from "../components/Navbar";
 import { Route, Routes } from "react-router-dom";
 import { Feed, Search } from "../components";
 import { CreatePin, PinDetail } from "../pages";
+import useDebounce from "../hooks/useDebounce";
 
 const Pins = ({ user }) => {
 	const [searchTerm, setSearchTerm] = useState("");
+
+	const [term] = useDebounce(searchTerm);
 
 	return (
 		<div className="px-2 md:px-5">
@@ -18,7 +21,10 @@ const Pins = ({ user }) => {
 			</div>
 			<div className="h-full">
 				<Routes>
-					<Route path="/" element={<Feed user={user} />} />
+					<Route
+						path="/"
+						element={<Feed user={user} searchTerm={term} />}
+					/>
 					<Route
 						path="/category/:categoryName"
 						element={<Feed user={user} />}

@@ -1,6 +1,6 @@
 import { HiMenu } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 import { Sidebar } from "../components";
 import { useEffect, useRef, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
