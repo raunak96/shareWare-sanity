@@ -1,32 +1,37 @@
-import { FcGoogle } from "react-icons/fc";
 import video from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
-import GoogleLogin from "react-google-login";
+import { GoogleLogin } from "@react-oauth/google";
 import { client } from "../sanity.config";
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 const Login = ({ setUserInfo }) => {
 	const navigate = useNavigate();
-	const responseGoogle = async res => {
+	const login = async res => {
 		try {
-			if (res?.profileObj) {
-				setUserInfo({ email: res.profileObj.email });
-				const { name, googleId, imageUrl, email } = res.profileObj;
-				const doc = {
-					_id: googleId,
-					_type: "user",
-					userName: name,
-					avatar: imageUrl,
-					email,
-				};
-				await client.createIfNotExists(doc);
-				navigate("/", { replace: true });
-			}
+			const {
+				name: userName,
+				picture: avatar,
+				sub: googleId,
+				email,
+			} = jwt_decode(`${res.credential}`);
+
+			const doc = {
+				_id: googleId,
+				_type: "user",
+				userName,
+				avatar,
+				email,
+			};
+			await client.createIfNotExists(doc);
+			setUserInfo({ email });
+			navigate("/", { replace: true });
 		} catch (error) {
-			console.log(error);
-			localStorage.clear();
+			console.log("Error", error);
+			alert("Could not sign you in. Please try again!");
 		}
 	};
+
 	return (
 		<div className="flex flex-col justify-start items-center h-screen">
 			<div className="relative w-full h-full">
@@ -46,20 +51,8 @@ const Login = ({ setUserInfo }) => {
 					</div>
 					<div className="shadow-2xl">
 						<GoogleLogin
-							clientId={process.env.REACT_APP_GOOGLE_CID}
-							render={renderProps => (
-								<button
-									className="bg-mainColor flex justify-center items-center p-2 rounded-lg cursor-pointer outline-none"
-									type="button"
-									onClick={renderProps.onClick}
-									disabled={renderProps.disabled}>
-									<FcGoogle className="mr-4" /> Sign in with
-									Google
-								</button>
-							)}
-							onSuccess={responseGoogle}
-							onFailure={responseGoogle}
-							cookiePolicy="single_host_origin"
+							onSuccess={login}
+							onError={() => console.log("Login Failed")}
 						/>
 					</div>
 				</div>

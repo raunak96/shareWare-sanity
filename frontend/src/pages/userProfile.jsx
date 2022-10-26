@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { GoogleLogout } from "react-google-login";
+import { googleLogout } from "@react-oauth/google";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import { MasonryLayout, Spinner } from "../components";
@@ -56,6 +56,7 @@ const UserProfile = ({ user: currentUser, clearUserInfo }) => {
 	}, [activeBtn, userId]);
 
 	const logout = () => {
+		googleLogout();
 		clearUserInfo();
 	};
 
@@ -92,23 +93,12 @@ const UserProfile = ({ user: currentUser, clearUserInfo }) => {
 					</h1>
 					<div className="absolute top-0 z-1 right-0 p-2">
 						{userId === currentUser?._id && (
-							<GoogleLogout
-								clientId={`${process.env.REACT_APP_GOOGLE_CID}`}
-								render={renderProps => (
-									<button
-										type="button"
-										className=" bg-white p-2 rounded-full cursor-pointer outline-none shadow-md"
-										onClick={renderProps.onClick}
-										disabled={renderProps.disabled}>
-										<AiOutlineLogout
-											color="red"
-											fontSize={21}
-										/>
-									</button>
-								)}
-								onLogoutSuccess={logout}
-								cookiePolicy="single_host_origin"
-							/>
+							<button
+								type="button"
+								className=" bg-white p-2 rounded-full cursor-pointer outline-none shadow-md"
+								onClick={logout}>
+								<AiOutlineLogout color="red" fontSize={21} />
+							</button>
 						)}
 					</div>
 				</div>
